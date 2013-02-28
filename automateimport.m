@@ -3,11 +3,15 @@
 [A_10_8_15_count,A_10_8_15_en_fr_ge_X,A_10_8_15_en_fr_X,A_10_8_15_eg_fr_Y,A_10_8_15_en_ge_X,A_10_8_15_en_ge_Y,A_10_8_15_fr_ge_X,A_10_8_15_fr_ge_Y]=preprocess(10,8,15);
 [A_10_7_15_count,A_10_7_15_en_fr_ge_X,A_10_7_15_en_fr_X,A_10_7_15_eg_fr_Y,A_10_7_15_en_ge_X,A_10_7_15_en_ge_Y,A_10_7_15_fr_ge_X,A_10_7_15_fr_ge_Y]=preprocess(10,7,15);
 [A_10_6_15_count,A_10_6_15_en_fr_ge_X,A_10_6_15_en_fr_X,A_10_6_15_eg_fr_Y,A_10_6_15_en_ge_X,A_10_6_15_en_ge_Y,A_10_6_15_fr_ge_X,A_10_6_15_fr_ge_Y]=preprocess(10,6,15);
+save('batch1.mat');
+clear all;
 [A_10_5_15_count,A_10_5_15_en_fr_ge_X,A_10_5_15_en_fr_X,A_10_5_15_eg_fr_Y,A_10_5_15_en_ge_X,A_10_5_15_en_ge_Y,A_10_5_15_fr_ge_X,A_10_5_15_fr_ge_Y]=preprocess(10,5,15);
 [A_10_4_15_count,A_10_4_15_en_fr_ge_X,A_10_4_15_en_fr_X,A_10_4_15_eg_fr_Y,A_10_4_15_en_ge_X,A_10_4_15_en_ge_Y,A_10_4_15_fr_ge_X,A_10_4_15_fr_ge_Y]=preprocess(10,4,15);
 [A_10_3_15_count,A_10_3_15_en_fr_ge_X,A_10_3_15_en_fr_X,A_10_3_15_eg_fr_Y,A_10_3_15_en_ge_X,A_10_3_15_en_ge_Y,A_10_3_15_fr_ge_X,A_10_3_15_fr_ge_Y]=preprocess(10,3,15);
 [A_15_15_15_count,A_15_15_15_en_fr_ge_X,A_15_15_15_en_fr_X,A_15_15_15_eg_fr_Y,A_15_15_15_en_ge_X,A_15_15_15_en_ge_Y,A_15_15_15_fr_ge_X,A_15_15_15_fr_ge_Y]=preprocess(15,15,15);
 [A_15_14_15_count,A_15_14_15_en_fr_ge_X,A_15_14_15_en_fr_X,A_15_14_15_eg_fr_Y,A_15_14_15_en_ge_X,A_15_14_15_en_ge_Y,A_15_14_15_fr_ge_X,A_15_14_15_fr_ge_Y]=preprocess(15,14,15);
+save('batch2.mat');
+clear all;
 [A_15_12_15_count,A_15_12_15_en_fr_ge_X,A_15_12_15_en_fr_X,A_15_12_15_eg_fr_Y,A_15_12_15_en_ge_X,A_15_12_15_en_ge_Y,A_15_12_15_fr_ge_X,A_15_12_15_fr_ge_Y]=preprocess(15,12,15);
 [A_15_11_15_count,A_15_11_15_en_fr_ge_X,A_15_11_15_en_fr_X,A_15_11_15_eg_fr_Y,A_15_11_15_en_ge_X,A_15_11_15_en_ge_Y,A_15_11_15_fr_ge_X,A_15_11_15_fr_ge_Y]=preprocess(15,11,15);
 [A_15_9_15_count,A_15_9_15_en_fr_ge_X,A_15_9_15_en_fr_X,A_15_9_15_eg_fr_Y,A_15_9_15_en_ge_X,A_15_9_15_en_ge_Y,A_15_9_15_fr_ge_X,A_15_9_15_fr_ge_Y]=preprocess(15,9,15);
@@ -16,6 +20,8 @@
 [A_15_5_15_count,A_15_5_15_en_fr_ge_X,A_15_5_15_en_fr_X,A_15_5_15_eg_fr_Y,A_15_5_15_en_ge_X,A_15_5_15_en_ge_Y,A_15_5_15_fr_ge_X,A_15_5_15_fr_ge_Y]=preprocess(15,5,15);
 [A_20_20_15_count,A_20_20_15_en_fr_ge_X,A_20_20_15_en_fr_X,A_20_20_15_eg_fr_Y,A_20_20_15_en_ge_X,A_20_20_15_en_ge_Y,A_20_20_15_fr_ge_X,A_20_20_15_fr_ge_Y]=preprocess(20,20,15);
 [A_20_18_15_count,A_20_18_15_en_fr_ge_X,A_20_18_15_en_fr_X,A_20_18_15_eg_fr_Y,A_20_18_15_en_ge_X,A_20_18_15_en_ge_Y,A_20_18_15_fr_ge_X,A_20_18_15_fr_ge_Y]=preprocess(20,18,15);
+save('batch3.mat');
+clear all;
 [A_20_16_15_count,A_20_16_15_en_fr_ge_X,A_20_16_15_en_fr_X,A_20_16_15_eg_fr_Y,A_20_16_15_en_ge_X,A_20_16_15_en_ge_Y,A_20_16_15_fr_ge_X,A_20_16_15_fr_ge_Y]=preprocess(20,16,15);
 [A_20_14_15_count,A_20_14_15_en_fr_ge_X,A_20_14_15_en_fr_X,A_20_14_15_eg_fr_Y,A_20_14_15_en_ge_X,A_20_14_15_en_ge_Y,A_20_14_15_fr_ge_X,A_20_14_15_fr_ge_Y]=preprocess(20,14,15);
 [A_20_12_15_count,A_20_12_15_en_fr_ge_X,A_20_12_15_en_fr_X,A_20_12_15_eg_fr_Y,A_20_12_15_en_ge_X,A_20_12_15_en_ge_Y,A_20_12_15_fr_ge_X,A_20_12_15_fr_ge_Y]=preprocess(20,12,15);
@@ -24,12 +30,16 @@
 [A_20_6_15_count,A_20_6_15_en_fr_ge_X,A_20_6_15_en_fr_X,A_20_6_15_eg_fr_Y,A_20_6_15_en_ge_X,A_20_6_15_en_ge_Y,A_20_6_15_fr_ge_X,A_20_6_15_fr_ge_Y]=preprocess(20,6,15);
 [A_25_25_15_count,A_25_25_15_en_fr_ge_X,A_25_25_15_en_fr_X,A_25_25_15_eg_fr_Y,A_25_25_15_en_ge_X,A_25_25_15_en_ge_Y,A_25_25_15_fr_ge_X,A_25_25_15_fr_ge_Y]=preprocess(25,25,15);
 [A_25_23_15_count,A_25_23_15_en_fr_ge_X,A_25_23_15_en_fr_X,A_25_23_15_eg_fr_Y,A_25_23_15_en_ge_X,A_25_23_15_en_ge_Y,A_25_23_15_fr_ge_X,A_25_23_15_fr_ge_Y]=preprocess(25,23,15);
+save('batch4.mat');
+clear all;
 [A_25_20_15_count,A_25_20_15_en_fr_ge_X,A_25_20_15_en_fr_X,A_25_20_15_eg_fr_Y,A_25_20_15_en_ge_X,A_25_20_15_en_ge_Y,A_25_20_15_fr_ge_X,A_25_20_15_fr_ge_Y]=preprocess(25,20,15);
 [A_25_18_15_count,A_25_18_15_en_fr_ge_X,A_25_18_15_en_fr_X,A_25_18_15_eg_fr_Y,A_25_18_15_en_ge_X,A_25_18_15_en_ge_Y,A_25_18_15_fr_ge_X,A_25_18_15_fr_ge_Y]=preprocess(25,18,15);
 [A_25_15_15_count,A_25_15_15_en_fr_ge_X,A_25_15_15_en_fr_X,A_25_15_15_eg_fr_Y,A_25_15_15_en_ge_X,A_25_15_15_en_ge_Y,A_25_15_15_fr_ge_X,A_25_15_15_fr_ge_Y]=preprocess(25,15,15);
 [A_25_13_15_count,A_25_13_15_en_fr_ge_X,A_25_13_15_en_fr_X,A_25_13_15_eg_fr_Y,A_25_13_15_en_ge_X,A_25_13_15_en_ge_Y,A_25_13_15_fr_ge_X,A_25_13_15_fr_ge_Y]=preprocess(25,13,15);
 [A_25_10_15_count,A_25_10_15_en_fr_ge_X,A_25_10_15_en_fr_X,A_25_10_15_eg_fr_Y,A_25_10_15_en_ge_X,A_25_10_15_en_ge_Y,A_25_10_15_fr_ge_X,A_25_10_15_fr_ge_Y]=preprocess(25,10,15);
 [A_25_8_15_count,A_25_8_15_en_fr_ge_X,A_25_8_15_en_fr_X,A_25_8_15_eg_fr_Y,A_25_8_15_en_ge_X,A_25_8_15_en_ge_Y,A_25_8_15_fr_ge_X,A_25_8_15_fr_ge_Y]=preprocess(25,8,15);
+save('batch5.mat');
+clear all;
 [A_50_50_15_count,A_50_50_15_en_fr_ge_X,A_50_50_15_en_fr_X,A_50_50_15_eg_fr_Y,A_50_50_15_en_ge_X,A_50_50_15_en_ge_Y,A_50_50_15_fr_ge_X,A_50_50_15_fr_ge_Y]=preprocess(50,50,15);
 [A_50_45_15_count,A_50_45_15_en_fr_ge_X,A_50_45_15_en_fr_X,A_50_45_15_eg_fr_Y,A_50_45_15_en_ge_X,A_50_45_15_en_ge_Y,A_50_45_15_fr_ge_X,A_50_45_15_fr_ge_Y]=preprocess(50,45,15);
 [A_50_40_15_count,A_50_40_15_en_fr_ge_X,A_50_40_15_en_fr_X,A_50_40_15_eg_fr_Y,A_50_40_15_en_ge_X,A_50_40_15_en_ge_Y,A_50_40_15_fr_ge_X,A_50_40_15_fr_ge_Y]=preprocess(50,40,15);
@@ -37,129 +47,61 @@
 [A_50_30_15_count,A_50_30_15_en_fr_ge_X,A_50_30_15_en_fr_X,A_50_30_15_eg_fr_Y,A_50_30_15_en_ge_X,A_50_30_15_en_ge_Y,A_50_30_15_fr_ge_X,A_50_30_15_fr_ge_Y]=preprocess(50,30,15);
 [A_50_25_15_count,A_50_25_15_en_fr_ge_X,A_50_25_15_en_fr_X,A_50_25_15_eg_fr_Y,A_50_25_15_en_ge_X,A_50_25_15_en_ge_Y,A_50_25_15_fr_ge_X,A_50_25_15_fr_ge_Y]=preprocess(50,25,15);
 [A_50_20_15_count,A_50_20_15_en_fr_ge_X,A_50_20_15_en_fr_X,A_50_20_15_eg_fr_Y,A_50_20_15_en_ge_X,A_50_20_15_en_ge_Y,A_50_20_15_fr_ge_X,A_50_20_15_fr_ge_Y]=preprocess(50,20,15);
+save('batch6.mat');
+clear all;
 [A_50_15_15_count,A_50_15_15_en_fr_ge_X,A_50_15_15_en_fr_X,A_50_15_15_eg_fr_Y,A_50_15_15_en_ge_X,A_50_15_15_en_ge_Y,A_50_15_15_fr_ge_X,A_50_15_15_fr_ge_Y]=preprocess(50,15,15);
 [A_100_100_15_count,A_100_100_15_en_fr_ge_X,A_100_100_15_en_fr_X,A_100_100_15_eg_fr_Y,A_100_100_15_en_ge_X,A_100_100_15_en_ge_Y,A_100_100_15_fr_ge_X,A_100_100_15_fr_ge_Y]=preprocess(100,100,15);
 [A_100_90_15_count,A_100_90_15_en_fr_ge_X,A_100_90_15_en_fr_X,A_100_90_15_eg_fr_Y,A_100_90_15_en_ge_X,A_100_90_15_en_ge_Y,A_100_90_15_fr_ge_X,A_100_90_15_fr_ge_Y]=preprocess(100,90,15);
 [A_100_80_15_count,A_100_80_15_en_fr_ge_X,A_100_80_15_en_fr_X,A_100_80_15_eg_fr_Y,A_100_80_15_en_ge_X,A_100_80_15_en_ge_Y,A_100_80_15_fr_ge_X,A_100_80_15_fr_ge_Y]=preprocess(100,80,15);
 [A_100_70_15_count,A_100_70_15_en_fr_ge_X,A_100_70_15_en_fr_X,A_100_70_15_eg_fr_Y,A_100_70_15_en_ge_X,A_100_70_15_en_ge_Y,A_100_70_15_fr_ge_X,A_100_70_15_fr_ge_Y]=preprocess(100,70,15);
 [A_100_60_15_count,A_100_60_15_en_fr_ge_X,A_100_60_15_en_fr_X,A_100_60_15_eg_fr_Y,A_100_60_15_en_ge_X,A_100_60_15_en_ge_Y,A_100_60_15_fr_ge_X,A_100_60_15_fr_ge_Y]=preprocess(100,60,15);
+save('batch7.mat');
+clear all;
 [A_100_50_15_count,A_100_50_15_en_fr_ge_X,A_100_50_15_en_fr_X,A_100_50_15_eg_fr_Y,A_100_50_15_en_ge_X,A_100_50_15_en_ge_Y,A_100_50_15_fr_ge_X,A_100_50_15_fr_ge_Y]=preprocess(100,50,15);
 [A_100_40_15_count,A_100_40_15_en_fr_ge_X,A_100_40_15_en_fr_X,A_100_40_15_eg_fr_Y,A_100_40_15_en_ge_X,A_100_40_15_en_ge_Y,A_100_40_15_fr_ge_X,A_100_40_15_fr_ge_Y]=preprocess(100,40,15);
 [A_100_30_15_count,A_100_30_15_en_fr_ge_X,A_100_30_15_en_fr_X,A_100_30_15_eg_fr_Y,A_100_30_15_en_ge_X,A_100_30_15_en_ge_Y,A_100_30_15_fr_ge_X,A_100_30_15_fr_ge_Y]=preprocess(100,30,15);
 [A_200_200_15_count,A_200_200_15_en_fr_ge_X,A_200_200_15_en_fr_X,A_200_200_15_eg_fr_Y,A_200_200_15_en_ge_X,A_200_200_15_en_ge_Y,A_200_200_15_fr_ge_X,A_200_200_15_fr_ge_Y]=preprocess(200,200,15);
 [A_200_180_15_count,A_200_180_15_en_fr_ge_X,A_200_180_15_en_fr_X,A_200_180_15_eg_fr_Y,A_200_180_15_en_ge_X,A_200_180_15_en_ge_Y,A_200_180_15_fr_ge_X,A_200_180_15_fr_ge_Y]=preprocess(200,180,15);
 [A_200_160_15_count,A_200_160_15_en_fr_ge_X,A_200_160_15_en_fr_X,A_200_160_15_eg_fr_Y,A_200_160_15_en_ge_X,A_200_160_15_en_ge_Y,A_200_160_15_fr_ge_X,A_200_160_15_fr_ge_Y]=preprocess(200,160,15);
+save('batch8.mat');
+clear all;
 [A_200_140_15_count,A_200_140_15_en_fr_ge_X,A_200_140_15_en_fr_X,A_200_140_15_eg_fr_Y,A_200_140_15_en_ge_X,A_200_140_15_en_ge_Y,A_200_140_15_fr_ge_X,A_200_140_15_fr_ge_Y]=preprocess(200,140,15);
 [A_200_120_15_count,A_200_120_15_en_fr_ge_X,A_200_120_15_en_fr_X,A_200_120_15_eg_fr_Y,A_200_120_15_en_ge_X,A_200_120_15_en_ge_Y,A_200_120_15_fr_ge_X,A_200_120_15_fr_ge_Y]=preprocess(200,120,15);
 [A_200_100_15_count,A_200_100_15_en_fr_ge_X,A_200_100_15_en_fr_X,A_200_100_15_eg_fr_Y,A_200_100_15_en_ge_X,A_200_100_15_en_ge_Y,A_200_100_15_fr_ge_X,A_200_100_15_fr_ge_Y]=preprocess(200,100,15);
 [A_200_80_15_count,A_200_80_15_en_fr_ge_X,A_200_80_15_en_fr_X,A_200_80_15_eg_fr_Y,A_200_80_15_en_ge_X,A_200_80_15_en_ge_Y,A_200_80_15_fr_ge_X,A_200_80_15_fr_ge_Y]=preprocess(200,80,15);
 [A_200_60_15_count,A_200_60_15_en_fr_ge_X,A_200_60_15_en_fr_X,A_200_60_15_eg_fr_Y,A_200_60_15_en_ge_X,A_200_60_15_en_ge_Y,A_200_60_15_fr_ge_X,A_200_60_15_fr_ge_Y]=preprocess(200,60,15);
 [A_300_300_15_count,A_300_300_15_en_fr_ge_X,A_300_300_15_en_fr_X,A_300_300_15_eg_fr_Y,A_300_300_15_en_ge_X,A_300_300_15_en_ge_Y,A_300_300_15_fr_ge_X,A_300_300_15_fr_ge_Y]=preprocess(300,300,15);
+save('batch9.mat');
+clear all;
 [A_300_270_15_count,A_300_270_15_en_fr_ge_X,A_300_270_15_en_fr_X,A_300_270_15_eg_fr_Y,A_300_270_15_en_ge_X,A_300_270_15_en_ge_Y,A_300_270_15_fr_ge_X,A_300_270_15_fr_ge_Y]=preprocess(300,270,15);
 [A_300_240_15_count,A_300_240_15_en_fr_ge_X,A_300_240_15_en_fr_X,A_300_240_15_eg_fr_Y,A_300_240_15_en_ge_X,A_300_240_15_en_ge_Y,A_300_240_15_fr_ge_X,A_300_240_15_fr_ge_Y]=preprocess(300,240,15);
 [A_300_210_15_count,A_300_210_15_en_fr_ge_X,A_300_210_15_en_fr_X,A_300_210_15_eg_fr_Y,A_300_210_15_en_ge_X,A_300_210_15_en_ge_Y,A_300_210_15_fr_ge_X,A_300_210_15_fr_ge_Y]=preprocess(300,210,15);
 [A_300_180_15_count,A_300_180_15_en_fr_ge_X,A_300_180_15_en_fr_X,A_300_180_15_eg_fr_Y,A_300_180_15_en_ge_X,A_300_180_15_en_ge_Y,A_300_180_15_fr_ge_X,A_300_180_15_fr_ge_Y]=preprocess(300,180,15);
 [A_300_150_15_count,A_300_150_15_en_fr_ge_X,A_300_150_15_en_fr_X,A_300_150_15_eg_fr_Y,A_300_150_15_en_ge_X,A_300_150_15_en_ge_Y,A_300_150_15_fr_ge_X,A_300_150_15_fr_ge_Y]=preprocess(300,150,15);
+save('batch10.mat');
+clear all;
 [A_300_120_15_count,A_300_120_15_en_fr_ge_X,A_300_120_15_en_fr_X,A_300_120_15_eg_fr_Y,A_300_120_15_en_ge_X,A_300_120_15_en_ge_Y,A_300_120_15_fr_ge_X,A_300_120_15_fr_ge_Y]=preprocess(300,120,15);
 [A_300_90_15_count,A_300_90_15_en_fr_ge_X,A_300_90_15_en_fr_X,A_300_90_15_eg_fr_Y,A_300_90_15_en_ge_X,A_300_90_15_en_ge_Y,A_300_90_15_fr_ge_X,A_300_90_15_fr_ge_Y]=preprocess(300,90,15);
 [A_400_400_15_count,A_400_400_15_en_fr_ge_X,A_400_400_15_en_fr_X,A_400_400_15_eg_fr_Y,A_400_400_15_en_ge_X,A_400_400_15_en_ge_Y,A_400_400_15_fr_ge_X,A_400_400_15_fr_ge_Y]=preprocess(400,400,15);
 [A_400_360_15_count,A_400_360_15_en_fr_ge_X,A_400_360_15_en_fr_X,A_400_360_15_eg_fr_Y,A_400_360_15_en_ge_X,A_400_360_15_en_ge_Y,A_400_360_15_fr_ge_X,A_400_360_15_fr_ge_Y]=preprocess(400,360,15);
 [A_400_320_15_count,A_400_320_15_en_fr_ge_X,A_400_320_15_en_fr_X,A_400_320_15_eg_fr_Y,A_400_320_15_en_ge_X,A_400_320_15_en_ge_Y,A_400_320_15_fr_ge_X,A_400_320_15_fr_ge_Y]=preprocess(400,320,15);
 [A_400_280_15_count,A_400_280_15_en_fr_ge_X,A_400_280_15_en_fr_X,A_400_280_15_eg_fr_Y,A_400_280_15_en_ge_X,A_400_280_15_en_ge_Y,A_400_280_15_fr_ge_X,A_400_280_15_fr_ge_Y]=preprocess(400,280,15);
+save('batch11.mat');
+clear all;
 [A_400_240_15_count,A_400_240_15_en_fr_ge_X,A_400_240_15_en_fr_X,A_400_240_15_eg_fr_Y,A_400_240_15_en_ge_X,A_400_240_15_en_ge_Y,A_400_240_15_fr_ge_X,A_400_240_15_fr_ge_Y]=preprocess(400,240,15);
 [A_400_200_15_count,A_400_200_15_en_fr_ge_X,A_400_200_15_en_fr_X,A_400_200_15_eg_fr_Y,A_400_200_15_en_ge_X,A_400_200_15_en_ge_Y,A_400_200_15_fr_ge_X,A_400_200_15_fr_ge_Y]=preprocess(400,200,15);
 [A_400_160_15_count,A_400_160_15_en_fr_ge_X,A_400_160_15_en_fr_X,A_400_160_15_eg_fr_Y,A_400_160_15_en_ge_X,A_400_160_15_en_ge_Y,A_400_160_15_fr_ge_X,A_400_160_15_fr_ge_Y]=preprocess(400,160,15);
 [A_400_120_15_count,A_400_120_15_en_fr_ge_X,A_400_120_15_en_fr_X,A_400_120_15_eg_fr_Y,A_400_120_15_en_ge_X,A_400_120_15_en_ge_Y,A_400_120_15_fr_ge_X,A_400_120_15_fr_ge_Y]=preprocess(400,120,15);
 [A_500_500_15_count,A_500_500_15_en_fr_ge_X,A_500_500_15_en_fr_X,A_500_500_15_eg_fr_Y,A_500_500_15_en_ge_X,A_500_500_15_en_ge_Y,A_500_500_15_fr_ge_X,A_500_500_15_fr_ge_Y]=preprocess(500,500,15);
 [A_500_450_15_count,A_500_450_15_en_fr_ge_X,A_500_450_15_en_fr_X,A_500_450_15_eg_fr_Y,A_500_450_15_en_ge_X,A_500_450_15_en_ge_Y,A_500_450_15_fr_ge_X,A_500_450_15_fr_ge_Y]=preprocess(500,450,15);
+save('batch12.mat');
+clear all;
 [A_500_400_15_count,A_500_400_15_en_fr_ge_X,A_500_400_15_en_fr_X,A_500_400_15_eg_fr_Y,A_500_400_15_en_ge_X,A_500_400_15_en_ge_Y,A_500_400_15_fr_ge_X,A_500_400_15_fr_ge_Y]=preprocess(500,400,15);
 [A_500_350_15_count,A_500_350_15_en_fr_ge_X,A_500_350_15_en_fr_X,A_500_350_15_eg_fr_Y,A_500_350_15_en_ge_X,A_500_350_15_en_ge_Y,A_500_350_15_fr_ge_X,A_500_350_15_fr_ge_Y]=preprocess(500,350,15);
 [A_500_300_15_count,A_500_300_15_en_fr_ge_X,A_500_300_15_en_fr_X,A_500_300_15_eg_fr_Y,A_500_300_15_en_ge_X,A_500_300_15_en_ge_Y,A_500_300_15_fr_ge_X,A_500_300_15_fr_ge_Y]=preprocess(500,300,15);
 [A_500_250_15_count,A_500_250_15_en_fr_ge_X,A_500_250_15_en_fr_X,A_500_250_15_eg_fr_Y,A_500_250_15_en_ge_X,A_500_250_15_en_ge_Y,A_500_250_15_fr_ge_X,A_500_250_15_fr_ge_Y]=preprocess(500,250,15);
 [A_500_200_15_count,A_500_200_15_en_fr_ge_X,A_500_200_15_en_fr_X,A_500_200_15_eg_fr_Y,A_500_200_15_en_ge_X,A_500_200_15_en_ge_Y,A_500_200_15_fr_ge_X,A_500_200_15_fr_ge_Y]=preprocess(500,200,15);
 [A_500_150_15_count,A_500_150_15_en_fr_ge_X,A_500_150_15_en_fr_X,A_500_150_15_eg_fr_Y,A_500_150_15_en_ge_X,A_500_150_15_en_ge_Y,A_500_150_15_fr_ge_X,A_500_150_15_fr_ge_Y]=preprocess(500,150,15);
-[A_1000_1000_15_count,A_1000_1000_15_en_fr_ge_X,A_1000_1000_15_en_fr_X,A_1000_1000_15_eg_fr_Y,A_1000_1000_15_en_ge_X,A_1000_1000_15_en_ge_Y,A_1000_1000_15_fr_ge_X,A_1000_1000_15_fr_ge_Y]=preprocess(1000,1000,15);
-[A_1000_900_15_count,A_1000_900_15_en_fr_ge_X,A_1000_900_15_en_fr_X,A_1000_900_15_eg_fr_Y,A_1000_900_15_en_ge_X,A_1000_900_15_en_ge_Y,A_1000_900_15_fr_ge_X,A_1000_900_15_fr_ge_Y]=preprocess(1000,900,15);
-[A_1000_800_15_count,A_1000_800_15_en_fr_ge_X,A_1000_800_15_en_fr_X,A_1000_800_15_eg_fr_Y,A_1000_800_15_en_ge_X,A_1000_800_15_en_ge_Y,A_1000_800_15_fr_ge_X,A_1000_800_15_fr_ge_Y]=preprocess(1000,800,15);
-[A_1000_700_15_count,A_1000_700_15_en_fr_ge_X,A_1000_700_15_en_fr_X,A_1000_700_15_eg_fr_Y,A_1000_700_15_en_ge_X,A_1000_700_15_en_ge_Y,A_1000_700_15_fr_ge_X,A_1000_700_15_fr_ge_Y]=preprocess(1000,700,15);
-[A_1000_600_15_count,A_1000_600_15_en_fr_ge_X,A_1000_600_15_en_fr_X,A_1000_600_15_eg_fr_Y,A_1000_600_15_en_ge_X,A_1000_600_15_en_ge_Y,A_1000_600_15_fr_ge_X,A_1000_600_15_fr_ge_Y]=preprocess(1000,600,15);
-[A_1000_500_15_count,A_1000_500_15_en_fr_ge_X,A_1000_500_15_en_fr_X,A_1000_500_15_eg_fr_Y,A_1000_500_15_en_ge_X,A_1000_500_15_en_ge_Y,A_1000_500_15_fr_ge_X,A_1000_500_15_fr_ge_Y]=preprocess(1000,500,15);
-[A_1000_400_15_count,A_1000_400_15_en_fr_ge_X,A_1000_400_15_en_fr_X,A_1000_400_15_eg_fr_Y,A_1000_400_15_en_ge_X,A_1000_400_15_en_ge_Y,A_1000_400_15_fr_ge_X,A_1000_400_15_fr_ge_Y]=preprocess(1000,400,15);
-[A_1000_300_15_count,A_1000_300_15_en_fr_ge_X,A_1000_300_15_en_fr_X,A_1000_300_15_eg_fr_Y,A_1000_300_15_en_ge_X,A_1000_300_15_en_ge_Y,A_1000_300_15_fr_ge_X,A_1000_300_15_fr_ge_Y]=preprocess(1000,300,15);
-[A_2000_2000_15_count,A_2000_2000_15_en_fr_ge_X,A_2000_2000_15_en_fr_X,A_2000_2000_15_eg_fr_Y,A_2000_2000_15_en_ge_X,A_2000_2000_15_en_ge_Y,A_2000_2000_15_fr_ge_X,A_2000_2000_15_fr_ge_Y]=preprocess(2000,2000,15);
-[A_2000_1800_15_count,A_2000_1800_15_en_fr_ge_X,A_2000_1800_15_en_fr_X,A_2000_1800_15_eg_fr_Y,A_2000_1800_15_en_ge_X,A_2000_1800_15_en_ge_Y,A_2000_1800_15_fr_ge_X,A_2000_1800_15_fr_ge_Y]=preprocess(2000,1800,15);
-[A_2000_1600_15_count,A_2000_1600_15_en_fr_ge_X,A_2000_1600_15_en_fr_X,A_2000_1600_15_eg_fr_Y,A_2000_1600_15_en_ge_X,A_2000_1600_15_en_ge_Y,A_2000_1600_15_fr_ge_X,A_2000_1600_15_fr_ge_Y]=preprocess(2000,1600,15);
-[A_2000_1400_15_count,A_2000_1400_15_en_fr_ge_X,A_2000_1400_15_en_fr_X,A_2000_1400_15_eg_fr_Y,A_2000_1400_15_en_ge_X,A_2000_1400_15_en_ge_Y,A_2000_1400_15_fr_ge_X,A_2000_1400_15_fr_ge_Y]=preprocess(2000,1400,15);
-[A_2000_1200_15_count,A_2000_1200_15_en_fr_ge_X,A_2000_1200_15_en_fr_X,A_2000_1200_15_eg_fr_Y,A_2000_1200_15_en_ge_X,A_2000_1200_15_en_ge_Y,A_2000_1200_15_fr_ge_X,A_2000_1200_15_fr_ge_Y]=preprocess(2000,1200,15);
-[A_2000_1000_15_count,A_2000_1000_15_en_fr_ge_X,A_2000_1000_15_en_fr_X,A_2000_1000_15_eg_fr_Y,A_2000_1000_15_en_ge_X,A_2000_1000_15_en_ge_Y,A_2000_1000_15_fr_ge_X,A_2000_1000_15_fr_ge_Y]=preprocess(2000,1000,15);
-[A_2000_800_15_count,A_2000_800_15_en_fr_ge_X,A_2000_800_15_en_fr_X,A_2000_800_15_eg_fr_Y,A_2000_800_15_en_ge_X,A_2000_800_15_en_ge_Y,A_2000_800_15_fr_ge_X,A_2000_800_15_fr_ge_Y]=preprocess(2000,800,15);
-[A_2000_600_15_count,A_2000_600_15_en_fr_ge_X,A_2000_600_15_en_fr_X,A_2000_600_15_eg_fr_Y,A_2000_600_15_en_ge_X,A_2000_600_15_en_ge_Y,A_2000_600_15_fr_ge_X,A_2000_600_15_fr_ge_Y]=preprocess(2000,600,15);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
