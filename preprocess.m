@@ -10,48 +10,47 @@
 %   C:      number of cepstral coefficients
 %
 %   return:
-%       count:          number of valid input files for each language
-%       en_fr_ge_X:     X vector for 3 languages
-%       en_fr_ge_Y:     Y vector for 3 languages
-%       xx_xx_X:        X vector for 2 languages
-%       xx_xx_Y:        Y vector for 2 languages
-%       xx_X:           X vector for 1 language
-%       xx_Y:           Y vector for 1 language
+%       mode:           ['train'|'test'] determine which directory to read
+%       frame_count:    number of frames for each language
+%       file_count:     number of files for each language
+%       xx_X:           X vector for xx language
+%       xx_Y:           Y vector for xx language
+%       xx_marke        file delimiters for xx language
 
 
-function [count, en_fr_ge_X,en_fr_ge_Y,en_fr_X,en_fr_Y,en_ge_X,en_ge_Y,fr_ge_X,fr_ge_Y,en_X,fr_X,ge_X,en_Y,fr_Y,ge_Y]=preprocess(Tw,Ts,C)
+function [data]=preprocess(mode,Tw,Ts,C)
     
     addpath('./preprocess');
-    [en_X]=pipelineX('../wav/en',Tw,Ts,C);
-    [fr_X]=pipelineX('../wav/fr',Tw,Ts,C);
-    [ge_X]=pipelineX('../wav/ge',Tw,Ts,C);
+    
+    f1='frame_count';
+    f2='file_count';
+    f3='en_X';
+    f4='fr_X';
+    f5='ge_X';
+    f6='en_Y';
+    f7='fr_Y';
+    f8='ge_Y';
+    f9='en_marker';
+    f10='fr_marker';
+    f11='ge_marker';
+
+    en_dir=strcat('../wav/en/',mode);
+    fr_dir=strcat('../wav/fr/',mode);
+    ge_dir=strcat('../wav/ge/',mode);
+
+    [en_X, en_marker]=pipelineX(en_dir,Tw,Ts,C);
+    [fr_X, fr_marker]=pipelineX(fr_dir,Tw,Ts,C);
+    [ge_X, ge_marker]=pipelineX(ge_dir,Tw,Ts,C);
     
     [en_Y]=generateY(en_X,[1;0;0]);
     [fr_Y]=generateY(fr_X,[0;1;0]);
-    [ge_Y]=generateY(ge_X,[0;0;1]);
+    [ge_Y]=generateY(ge_X,[0;0;1]);    
     
-    en_fr_ge_X = cat(2, en_X, fr_X, ge_X);
-    en_fr_ge_Y = cat(2, en_Y, fr_Y, ge_Y);
     
-    [en_Y]=generateY(en_X,[1;0;0]);
-    [fr_Y]=generateY(fr_X,[0;1;0]);
+    frame_count=[size(en_Y,2),size(fr_Y,2),size(ge_Y,2)];
+    file_count=[size(en_marker,2),size(fr_marker,2),size(ge_marker,2)];
     
-    en_fr_X = cat(2, en_X, fr_X);
-    en_fr_Y = cat(2, en_Y, fr_Y);
-   
-    [en_Y]=generateY(en_X,[1;0;0]);
-    [ge_Y]=generateY(ge_X,[0;0;1]);
-    
-    en_ge_X = cat(2, en_X, ge_X);
-    en_ge_Y = cat(2, en_Y, ge_Y);
-    
-    [fr_Y]=generateY(fr_X,[0;1;0]);
-    [ge_Y]=generateY(ge_X,[0;0;1]);
-    
-    fr_ge_X = cat(2, fr_X, ge_X);
-    fr_ge_Y = cat(2, fr_Y, ge_Y);
-    
-    count=[size(en_Y,2),size(fr_Y,2),size(ge_Y,2)];
+    data=struct(f1,frame_count,f2,file_count,f3,en_X,f4,fr_X,f5,ge_X,f6,en_Y,f7,fr_Y,f8,ge_Y,f9,en_marker,f10,fr_marker,f11,ge_marker);
 
 end
     

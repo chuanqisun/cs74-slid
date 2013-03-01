@@ -7,7 +7,7 @@
 % convergence_mes mes to stop training
 % k for k-fold validation
 
-function myNet = nettrain(trainX,trainY,topo,max_epoch,l_rate,convergence_mse,k)
+function myNet = nettrain(train_data,test_data,topo,max_epoch,l_rate,convergence_mse,k)
 
 %flag for plotting legend
 legendset=0;
@@ -16,12 +16,31 @@ legendset=0;
 myNet.topo = topo;
 
 %set constants for topology and input/output
-trainX = trainX';
-trainY = trainY';
+trainX = cat(2,train_data.en_X,train_data.fr_X,train_data.ge_X)';
+trainY = cat(2,train_data.en_Y,train_data.fr_Y,train_data.ge_Y)';
+
+en_testX=test_data.en_X';
+fr_testX=test_data.fr_X';
+ge_testX=test_data.ge_X';
+
+en_testY=test_data.en_Y';
+fr_testY=test_data.fr_Y';
+ge_testY=test_data.ge_Y';
+
+testX = cat(1, en_testX,fr_testX,ge_testX);
+testY = cat(1, en_testY,fr_testY,ge_testY);
+
+en_marker=test_data.en_marker;
+fr_marker=test_data.fr_marker;
+ge_marker=test_data.ge_marker;
+
+
 
 %prepare error rate array against epoch list
 train_error_list=[];
 validation_error_list=[];
+frame_test_error_list=[];
+file_test_error_list=[];
 epoch_list=[];
 
 %split into kfold
@@ -150,51 +169,104 @@ while mse > convergence_mse && epochs < max_epoch
     end     
 
     
+
+    
     %adjust weights with avg delta
     for i = 1:layer_N-1
         weights{i} = weights{i} + avg_delta_weights{i} ./sample_N;
     end    
     myNet.weights = weights;
     
+    %compute test error based on frames
+    output = nettest(testX,myNet);
+    frame_test_error_rate = calculate_error_rate(output, testY);
+    frame_test_error_list=[frame_test_error_list, frame_test_error_rate];
     
-    
-    disp('epoch: ');
-    disp(epochs);
+    %computer test error rate based on files;
+    [error1,c1]=netfiletest(myNet,en_testX,en_testY,en_marker);
+    [error2,c2]=netfiletest(myNet,fr_testX,fr_testY,fr_marker);
+    [error3,c3]=netfiletest(myNet,ge_testX,ge_testY,ge_marker);
+    file_test_error_rate=(c1+c2+c3)/sum(test_data.file_count);
+    file_test_error_list=[file_test_error_list,file_test_error_rate];
     
     validation_error_list=[validation_error_list, validation_error_rate/k];
-    train_error_list=[train_error_list, train_error_rate/k];
-    disp('validation error: ');
-    disp(validation_error_rate/k);
-    disp('train error: ');    
-    disp(train_error_rate/k);    
+    train_error_list=[train_error_list, train_error_rate/k];  
     epoch_list=[epoch_list, epochs];
     
     %plot
 
-    p1=plot(epoch_list, validation_error_list, 'r');  
-    hold all;
-    p2=plot(epoch_list, train_error_list, 'b');
-    
+    if epochs <= 100
+        p1=plot(epoch_list, validation_error_list, 'r', 'LineWidth',2);  
+        hold all;
+        p2=plot(epoch_list, train_error_list, 'b', 'LineWidth',2);
+        p3=plot(epoch_list, frame_test_error_list, 'g', 'LineWidth',2);
+        p4=plot(epoch_list, file_test_error_list, 'y', 'LineWidth',2);
+    else
+        hold all;
+        p1=plot(epoch_list(epochs-100:epochs), validation_error_list(epochs-100:epochs), 'r', 'LineWidth',2);  
+        p2=plot(epoch_list(epochs-100:epochs), train_error_list(epochs-100:epochs), 'b', 'LineWidth',2);
+        p3=plot(epoch_list(epochs-100:epochs), frame_test_error_list(epochs-100:epochs), 'g', 'LineWidth',2);
+        p4=plot(epoch_list(epochs-100:epochs), file_test_error_list(epochs-100:epochs), 'y', 'LineWidth',2);
+    end
     if legendset==0
         legendset=1;
-        set(p1,'Color','red','LineWidth',2);
-        set(p2,'Color','blue','LineWidth',2);
-        hleg1 = legend([p1, p2], 'Validation','Training');
-        legend(hleg1, 'Location', 'NorthEast');
+        hleg1 = legend([p1, p2, p3, p4], 'Validation','Training','Frame Test','File Test');
+        legend(hleg1, 'Location', 'NorthEastOutside');
         title('Performance');
         xlabel('epoch');
         ylabel('error rate');
     end
+    
+    %flush buffer
+    if mod(epochs,100)==0
+        clf;
+        legendset=0;
+    end
 
     drawnow;
     
+    disp('epoch: ');
+    disp(epochs);
     %update epoch
     epochs = epochs +1;
     disp('train MSE: ');  
     mse = ms_sum/(sample_N*size(trainY, 2));
     disp(mse);
+    
 
-                    
 end
 
+%output summary
 
+close all;
+p1=plot(epoch_list, validation_error_list, 'r');  
+hold all;
+p2=plot(epoch_list, train_error_list, 'b');
+p3=plot(epoch_list, frame_test_error_list, 'g');
+p4=plot(epoch_list, file_test_error_list, 'y');
+set(p1,'Color','red','LineWidth',2);
+set(p2,'Color','blue','LineWidth',2);
+set(p3,'Color','green','LineWidth',2);
+set(p4,'Color','yellow','LineWidth',2);
+hleg1 = legend([p1, p2, p3, p4], 'Validation','Training','Frame Test','File Test');
+legend(hleg1, 'Location', 'NorthEastOutside');
+title('Performance');
+xlabel('epoch');
+ylabel('error rate');
+
+s1=strcat('total epochs: ',num2str(epochs));
+s2=strcat('english file error: ',num2str(error1));
+s3=strcat('french file error: ',num2str(error2));
+s4=strcat('germen file error: ',num2str(error3));
+s5=strcat('training error: ',num2str(train_error_rate/k));
+s6=strcat('validation error: ',num2str(validation_error_rate/k));
+s7=strcat('frame test error: ',num2str(frame_test_error_rate));
+s8=strcat('file test error: ',num2str(file_test_error_rate));
+disp(s1);
+disp(s2);
+disp(s3);
+disp(s4);
+disp(s5);
+disp(s6);
+disp(s7);
+disp(s8);
