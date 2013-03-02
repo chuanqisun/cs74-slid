@@ -39,10 +39,9 @@ ge_marker=test_data.ge_marker;
 
 
 %prepare error rate array against epoch list
-train_error_list=[];
-validation_error_list=[];
-frame_test_error_list=[];
-file_test_error_list=[];
+train_mse_list=[];
+validation_mse_list=[];
+frame_test_mse_list=[];
 epoch_list=[];
 
 %split into kfold
@@ -86,9 +85,6 @@ for i=1:layer_N-1
 end
 
 
-
-
-
 %allocate space for y, input signal of each layer.  first layer is input,
 %the hidden layers are sigmoided values plus a bias value. The output layer
 %has no bias node.
@@ -115,8 +111,8 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     end   
     
     %reset error rates
-    validation_error_rate = 0;
-    train_error_rate = 0;
+    validation_mse = 0;
+    train_mse = 0;
     
     %for each fold feedforwad, backprop, and compute error
     for f=1:k
@@ -147,8 +143,6 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
         
         %error at the output layer
         error_out = (trainY-y{layer_N});
-        ms_sum = sum(sum(error_out.^2));
-
 
         %output error * derivative of the sigmoid function
         D = error_out.* y{layer_N}.*(1- y{layer_N});
@@ -172,11 +166,11 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
         end    
         myNet.weights = temp_weights;
      
-        %compute current error rate
-    	output = nettest(validX,myNet);
-        validation_error_rate = validation_error_rate + calculate_error_rate(output, validY);
-        output = nettest(trainX,myNet);
-        train_error_rate = train_error_rate + calculate_error_rate(output, trainY);
+        %compute current mse
+    	[output,raw_output,mse] = nettest(myNet,validX,validY);
+        validation_mse = validation_mse + mse;
+        [output,raw_output,mse] = nettest(myNet,trainX,trainY);
+        train_mse = train_mse + mse;
     end
 
     
@@ -188,43 +182,34 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     myNet.weights = weights;
     
     %compute test error based on frames
-    output = nettest(testX,myNet);
-    frame_test_error_rate = calculate_error_rate(output, testY);
-    frame_test_error_list=[frame_test_error_list, frame_test_error_rate];
+    [output, raw_output,frame_test_mse] = nettest(myNet,testX,testY);
+    frame_test_mse_list=[frame_test_mse_list, frame_test_mse];
     
     %computer test error rate based on files;
-    [error1,c1]=netfiletest(myNet,en_testX,en_testY,en_marker);
-    [error2,c2]=netfiletest(myNet,fr_testX,fr_testY,fr_marker);
-    [error3,c3]=netfiletest(myNet,ge_testX,ge_testY,ge_marker);
-    file_test_error_rate=(c1+c2+c3)/sum(test_data.file_count);
-    file_test_error_list=[file_test_error_list,file_test_error_rate];
-    
-    validation_error_list=[validation_error_list, validation_error_rate/k];
-    train_error_list=[train_error_list, train_error_rate/k];  
+    validation_mse_list=[validation_mse_list, validation_mse/k];
+    train_mse_list=[train_mse_list, train_mse/k];  
     epoch_list=[epoch_list, epochs];
     
     %plot
 
     if epochs <= 100
-        p1=plot(epoch_list, validation_error_list, 'r', 'LineWidth',2);  
+        p1=plot(epoch_list, validation_mse_list, 'r', 'LineWidth',2);  
         hold all;
-        p2=plot(epoch_list, train_error_list, 'b', 'LineWidth',2);
-        p3=plot(epoch_list, frame_test_error_list, 'g', 'LineWidth',2);
-        p4=plot(epoch_list, file_test_error_list, 'y', 'LineWidth',2);
+        p2=plot(epoch_list, train_mse_list, 'b', 'LineWidth',2);
+        p3=plot(epoch_list, frame_test_mse_list, 'g', 'LineWidth',2);
     else
         hold all;
-        p1=plot(epoch_list(epochs-100:epochs), validation_error_list(epochs-100:epochs), 'r', 'LineWidth',2);  
-        p2=plot(epoch_list(epochs-100:epochs), train_error_list(epochs-100:epochs), 'b', 'LineWidth',2);
-        p3=plot(epoch_list(epochs-100:epochs), frame_test_error_list(epochs-100:epochs), 'g', 'LineWidth',2);
-        p4=plot(epoch_list(epochs-100:epochs), file_test_error_list(epochs-100:epochs), 'y', 'LineWidth',2);
+        p1=plot(epoch_list(epochs-100:epochs), validation_mse_list(epochs-100:epochs), 'r', 'LineWidth',2);  
+        p2=plot(epoch_list(epochs-100:epochs), train_mse_list(epochs-100:epochs), 'b', 'LineWidth',2);
+        p3=plot(epoch_list(epochs-100:epochs), frame_test_mse_list(epochs-100:epochs), 'g', 'LineWidth',2);
     end
     if legendset==0
         legendset=1;
-        hleg1 = legend([p1, p2, p3, p4], 'Validation','Training','Frame Test','File Test');
+        hleg1 = legend([p1, p2, p3], 'Validation','Training','Test');
         legend(hleg1, 'Location', 'NorthEastOutside');
         title('Performance');
         xlabel('epoch');
-        ylabel('error rate');
+        ylabel('MSE');
     end
     
     %flush buffer
@@ -240,7 +225,7 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     %update epoch
     epochs = epochs +1;
     disp('train MSE: ');  
-    mse = ms_sum/(sample_N*size(trainY, 2));
+    mse = train_mse/k;
     if mse<min_mse
         min_mse=mse;
         fail_count=0;
@@ -253,19 +238,59 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
 
 end
 
+%measure error rate
+
+%frame test error rate
+[output,raw_output,frame_test_mse] = nettest(myNet,testX,testY);
+frame_test_error_rate = calculate_error_rate(output, testY);
+
+%file test error rate
+[error1,c1]=netfiletest(myNet,en_testX,en_testY,en_marker);
+[error2,c2]=netfiletest(myNet,fr_testX,fr_testY,fr_marker);
+[error3,c3]=netfiletest(myNet,ge_testX,ge_testY,ge_marker);
+file_test_error_rate=(c1+c2+c3)/sum(test_data.file_count);
+
+
+%training error rate and validation error rate
+validation_error_rate=0;
+train_error_rate=0;
+for f=1:k
+    %construct validation set
+    validX=kfoldX{f};
+    validY=kfoldY{f};
+
+    %construct trainset
+    trainX=[];
+    trainY=[];
+    for ff=1:k
+        if f~=ff
+            trainX=cat(1,trainX, kfoldX{ff});
+            trainY=cat(1,trainY, kfoldY{ff});
+        end
+    end 
+    output = nettest(myNet,validX,validY);
+    validation_error_rate = validation_error_rate + calculate_error_rate(output, validY);
+    output = nettest(myNet,trainX,trainY);
+    train_error_rate = train_error_rate + calculate_error_rate(output, trainY);    
+
+end
+
+validation_error_rate=validation_error_rate/k;
+train_error_rate=train_error_rate/k;
+    
+     
+
 %output summary
 
 close all;
-p1=plot(epoch_list, validation_error_list, 'r');  
+p1=plot(epoch_list, validation_mse_list, 'r');  
 hold all;
-p2=plot(epoch_list, train_error_list, 'b');
-p3=plot(epoch_list, frame_test_error_list, 'g');
-p4=plot(epoch_list, file_test_error_list, 'y');
+p2=plot(epoch_list, train_mse_list, 'b');
+p3=plot(epoch_list, frame_test_mse_list, 'g');
 set(p1,'Color','red','LineWidth',2);
 set(p2,'Color','blue','LineWidth',2);
 set(p3,'Color','green','LineWidth',2);
-set(p4,'Color','yellow','LineWidth',2);
-hleg1 = legend([p1, p2, p3, p4], 'Validation','Training','Frame Test','File Test');
+hleg1 = legend([p1, p2, p3], 'Validation','Training','Test');
 legend(hleg1, 'Location', 'NorthEastOutside');
 title('Performance');
 xlabel('epoch');
@@ -276,8 +301,8 @@ s2=strcat('mse performance: ',num2str(min_mse));
 s3=strcat('english file error: ',num2str(error1));
 s4=strcat('french file error: ',num2str(error2));
 s5=strcat('germen file error: ',num2str(error3));
-s6=strcat('training error: ',num2str(train_error_rate/k));
-s7=strcat('validation error: ',num2str(validation_error_rate/k));
+s6=strcat('training error: ',num2str(train_error_rate));
+s7=strcat('validation error: ',num2str(validation_error_rate));
 s8=strcat('frame test error: ',num2str(frame_test_error_rate));
 s9=strcat('file test error: ',num2str(file_test_error_rate));
 disp(s1);

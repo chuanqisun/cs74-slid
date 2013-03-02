@@ -1,7 +1,7 @@
 %------demo------------------------
 %note that batch1.mat is for demo
-[train_data]=preprocess('train',10,10,15);
-[test_data]=preprocess('test',10,10,15);
+[train_data]=preprocess('train',25,15,15);
+[test_data]=preprocess('test',25,15,15);
 save('batch1.mat');
 clear all;
 

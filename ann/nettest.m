@@ -1,4 +1,4 @@
-function [output, raw_output] = nettest(testX,myNet)
+function [output,raw_output,mse] = nettest(myNet,testX,testY)
 %get input/output and constants
 sample_N = size(testX, 1);
 
@@ -36,6 +36,14 @@ end
     
 %format raw output to 0 and 1 values.
 raw_output = y{layer_N};
+
+%compute mse
+
+error_out = (testY-raw_output);
+ms_sum = sum(sum(error_out.^2));
+mse = ms_sum/(sample_N*size(testY, 2));
+
+%compute prediction matrix
 output = zeros(sample_N, size(raw_output, 2));
     
 for p = 1:sample_N

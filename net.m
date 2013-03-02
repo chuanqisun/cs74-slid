@@ -7,4 +7,4 @@ addpath('ann');
 addpath('preprocess');
 load('batch1.mat');
 
-nettrain(train_data,test_data,[45, 30, 3],500,0.9,0.01,6,0.01,3);
+nettrain(train_data,test_data,[45, 30, 3],1000,1.9,0,10,0.01,10);
