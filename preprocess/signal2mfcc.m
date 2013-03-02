@@ -22,3 +22,5 @@ addpath('./mfcc','./voicebox');
            hamming = @(N)(0.54-0.46*cos(2*pi*[0:N-1].'/(N-1)));
            
 mfccs = mfcc( signal, fs, Tw, Ts, alpha, hamming, R, M, C, L );
+mfccs = mfccs(:,~isnan(mfccs(1,:)));
+

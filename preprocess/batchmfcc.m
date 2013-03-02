@@ -1,4 +1,4 @@
-function [mfcclist] = batchmfcc(signallist, fslist,Tw,Ts,C)
+function [mfcclist] = batchmfcc(signallist,fslist,Tw,Ts,C)
 
 %convert every signal in a cell array into MFCC vectors
 
