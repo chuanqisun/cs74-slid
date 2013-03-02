@@ -4,10 +4,12 @@
 % topo    topology [input_layer_size, ... , output_layer_size]
 % max_epoch maximum epoch to train
 % l_rate learning rate
+% lambda regulation term
+% fail_threshold #of epochs allowed after mse starts increasing
 % convergence_mes mes to stop training
 % k for k-fold validation
 
-function myNet = nettrain(train_data,test_data,topo,max_epoch,l_rate,convergence_mse,k)
+function myNet = nettrain(train_data,test_data,topo,max_epoch,l_rate,lambda,fail_threshold,convergence_mse,k)
 
 %flag for plotting legend
 legendset=0;
@@ -77,6 +79,16 @@ for i = 1:layer_N-1
     out{i} = zeros(sample_N, topo(i+1));
 end
 
+%allocate space for regulation term
+old_weights = cell(layer_N-1,1);
+for i=1:layer_N-1
+    old_weights{i} = zeros(topo(i+1), topo(i)+1);
+end
+
+
+
+
+
 %allocate space for y, input signal of each layer.  first layer is input,
 %the hidden layers are sigmoided values plus a bias value. The output layer
 %has no bias node.
@@ -88,11 +100,12 @@ for i = 2:layer_N-1
 end
 y{layer_N}= zeros(sample_N, topo(layer_N));
 
-
+min_mse=Inf;
+fail_count=0;
 mse = Inf;
 epochs = 0;
 
-while mse > convergence_mse && epochs < max_epoch
+while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
 
   
     
@@ -144,6 +157,7 @@ while mse > convergence_mse && epochs < max_epoch
         for i = layer_N-1: -1: 1
             delta_weights{i} = l_rate * D(:, 1:topo(i+1))' * y{i};
             avg_delta_weights{i}=avg_delta_weights{i} + delta_weights{i};
+ 
             %update D
             if i ~= 1
                 D = (D(:, 1:topo(i+1)) * weights{i}).* y{i}.*(1-y{i});
@@ -152,9 +166,11 @@ while mse > convergence_mse && epochs < max_epoch
         
         %update weights (temporary)
         for i = 1:layer_N-1
-            temp_weights{i} = weights{i} + delta_weights{i} ./sample_N;
+            old_weights{i}(end)=0;
+            temp_weights{i} = weights{i} + delta_weights{i} ./sample_N + lambda*old_weights{i};
+  
         end    
-        myNet.weights = temp_weights;        
+        myNet.weights = temp_weights;
      
         %compute current error rate
     	output = nettest(validX,myNet);
@@ -162,19 +178,13 @@ while mse > convergence_mse && epochs < max_epoch
         output = nettest(trainX,myNet);
         train_error_rate = train_error_rate + calculate_error_rate(output, trainY);
     end
-    
-    %compute avg delta weights across all folds
-    for i = 1:layer_N-1
-        avg_delta_weights{i} = avg_delta_weights{i}/k;
-    end     
-
-    
 
     
     %adjust weights with avg delta
     for i = 1:layer_N-1
-        weights{i} = weights{i} + avg_delta_weights{i} ./sample_N;
+        weights{i} = weights{i} + avg_delta_weights{i}/(k*sample_N) + lambda*old_weights{i};
     end    
+    old_weights=weights;
     myNet.weights = weights;
     
     %compute test error based on frames
@@ -231,7 +241,14 @@ while mse > convergence_mse && epochs < max_epoch
     epochs = epochs +1;
     disp('train MSE: ');  
     mse = ms_sum/(sample_N*size(trainY, 2));
+    if mse<min_mse
+        min_mse=mse;
+        fail_count=0;
+    else
+        fail_count = fail_count+1;
+    end
     disp(mse);
+    
     
 
 end
@@ -255,13 +272,14 @@ xlabel('epoch');
 ylabel('error rate');
 
 s1=strcat('total epochs: ',num2str(epochs));
-s2=strcat('english file error: ',num2str(error1));
-s3=strcat('french file error: ',num2str(error2));
-s4=strcat('germen file error: ',num2str(error3));
-s5=strcat('training error: ',num2str(train_error_rate/k));
-s6=strcat('validation error: ',num2str(validation_error_rate/k));
-s7=strcat('frame test error: ',num2str(frame_test_error_rate));
-s8=strcat('file test error: ',num2str(file_test_error_rate));
+s2=strcat('mse performance: ',num2str(min_mse));
+s3=strcat('english file error: ',num2str(error1));
+s4=strcat('french file error: ',num2str(error2));
+s5=strcat('germen file error: ',num2str(error3));
+s6=strcat('training error: ',num2str(train_error_rate/k));
+s7=strcat('validation error: ',num2str(validation_error_rate/k));
+s8=strcat('frame test error: ',num2str(frame_test_error_rate));
+s9=strcat('file test error: ',num2str(file_test_error_rate));
 disp(s1);
 disp(s2);
 disp(s3);
@@ -270,3 +288,4 @@ disp(s5);
 disp(s6);
 disp(s7);
 disp(s8);
+disp(s9);
