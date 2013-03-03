@@ -1,14 +1,9 @@
 %% dual formulation
 %degree = ploynomial kernel degree
-function [alpha, fval, exitflag, output, lambda, r, m]=svmtrain(trainX,trainY,C,degree)
+function [SVstruct]=svmtrain(trainX,trainY,kernel_matrix,C,threshold)
 
 %compute number of samples
 m=size(trainX,1);
-%compute number of features
-r=size(trainX,2);
-
-%compute kernel matrix
-kernel_matrix=kernel(trainX,degree);
 
 % prepare for H
 H=zeros(m);
@@ -34,6 +29,7 @@ lb=zeros(m,1);
 ub=C*ones(m,1);
 
 % call MATLAB quadprog
-opts = optimset('Algorithm','interior-point-convex');
-[alpha, fval, exitflag, output, lambda]= quadprog(H, f, A, d, Aeq, deq, lb, ub, [], opts);
+opts = optimset('Algorithm','interior-point-convex','Display','iter','MaxIter', 20);
+[alpha]= quadprog(H, f, A, d, Aeq, deq, lb, ub, [], opts);
+SVstruct = collectSV(alpha, trainX, trainY, threshold,kernel_matrix);
 end

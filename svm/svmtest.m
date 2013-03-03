@@ -1,62 +1,58 @@
-load('iris_subset.mat');
+%test svm multiclass classification error rate
+function [distrib_matrix, correct_matrix, raw_output] = svmtest(testX,testY,enSV,frSV,geSV,degree)
 
-hold all;
-% first plot the data
-gscatter(trainsetX(:,1), trainsetX(:,2), trainsetY, 'br', 'ox');
+distrib_matrix=zeros(4);
+correct_matrix=zeros(4);    
+m=size(testX,1);
 
-% compute alpha for C=100
-[alpha, fval, exitflag, output, lambda, r, m]=q1h(100,3);
+%prepare raw_output matrix
+raw_output=zeros(m,3);
 
-
-% register support vectors
-SVx=[];
-SValpha=[];
-SVy=[];
-SVidx=[];
-threshold=1e-5;
+%for each eample in testX
 for i=1:m
-    if alpha(i)>threshold
-        SVx=[SVx;trainsetX(i,:)];
-        SValpha=[SValpha;alpha(i)];
-        SVy=[SVy;trainsetY(i)];
-        SVidx=[SVidx;i];
+
+    %compute prediction
+    predict_idx=1;
+    score_en=svmsimpletest(testX(i,:),enSV,degree);
+    max_score=score_en;
+    score_fr=svmsimpletest(testX(i,:),frSV,degree);
+    if score_fr>max_score
+        max_score=score_fr;
+        predict_idx=2;
     end
-end
-
-% compute bias b
-b=0;
-kernel_matrix=kernel(trainsetX,3);
-outtersum=0;
-for i=1:size(SVx,1)
-    innersum=0;
-    for j=1:size(SVx,1)
-        innersum=innersum + SValpha(j)*SVy(j)*kernel_matrix(SVidx(i),SVidx(j));
+    score_ge=svmsimpletest(testX(i,:),geSV,degree);
+    if score_ge>max_score
+        predict_idx=3;
     end
-    outtersum=outtersum+SVy(i) - innersum;
-end
-b=outtersum/size(SVx,1);
-
-
-% report # SVs
-disp('number of support vectors:');
-disp(size(SVx,1));
-
-%plot bundary with brutal force
-minx1=[];
-minx2=[];
-idx=0;
-for x1=4:0.01:7
-    idx=idx+1;
-    for x2=1:0.01:5.5
-        y=0;
-        for i=1:size(SVx,1)
-            y=y+SValpha(i)*SVy(i)*((SVx(i,:)*[x1,x2]')^3);
-        end
-        y=y+b;
-        if (abs(y)<0.01)
-            minx1=[minx1,x1];
-            minx2=[minx2,x2];
+    
+    %store raw output
+    raw_output(i,:) = [score_en, score_fr, score_ge];
+   
+    %compute actual index
+    for j=1:3
+        if testY(i,j)==1
+            actual_idx=j;
         end
     end
+    
+    %write error matrix
+    distrib_matrix(actual_idx, predict_idx) = distrib_matrix(actual_idx, predict_idx) + 1;
+    
 end
-plot(minx1,minx2, 'k');
+
+
+distrib_matrix(:,4)=sum(distrib_matrix(:,1:3),2);
+distrib_matrix(4,4)=distrib_matrix(1,1)+distrib_matrix(2,2)+distrib_matrix(3,3);
+
+
+for i=1:3
+    for j=1:3
+        correct_matrix(i,j)=distrib_matrix(i,j)/m;
+    end
+end
+
+correct_matrix(4,4)=distrib_matrix(4,4)/m;
+for j=1:3
+    correct_matrix(j,4)=distrib_matrix(j,j)/distrib_matrix(j,4);
+end
+        
