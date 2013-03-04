@@ -1,4 +1,0 @@
-slid
-====
-
-spoken language identification
