@@ -32,7 +32,7 @@ for i=1:size(ARG,1)
 
     train_name=eval(strcat('train_data_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC)));
     test_name=eval(strcat('test_data_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC)));
-    result_name=strcat('ann_result_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC));
+    result_name=strcat('svm_result_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC));
 
 
     [trainX,envsallY,frvsallY,gevsallY,testX,testY,kernel_matrix]=svmpreprocess(train_name,test_name,1);
