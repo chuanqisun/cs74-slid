@@ -1,9 +1,10 @@
-%test svm multiclass classification error rate
-function [f,distrib_matrix] = svmsimplefiletest(testY, raw_output, marker)
+%test decision tree multiclass classification error rate
+function [f,distrib_matrix] = dtsimplefiletest(testY, raw_output, marker)
 
 distrib_matrix=zeros(4);   
 f=size(marker,2);
 raw_file_output=zeros(f,3);
+testY=testY';
 %for each eample in testY
 for i=1:f
     %get per file location
