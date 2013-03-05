@@ -1,4 +1,7 @@
 %% make sure you have already loaded the data
+%
+% automated neural networks test script
+%
 % ARG= 
 %[
 %Tw1, Ts1, MFCC1
