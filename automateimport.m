@@ -8,6 +8,26 @@ clear all;
 
 
 
+%%Tuning MFCC
+[train_data_200_60_5]=preprocess('train',200,60,5);
+[test_data_200_60_5]=preprocess('test',200,60,5);
+save('batch26.mat');
+clear all;
+[train_data_200_60_15]=preprocess('train',200,60,15);
+[test_data_200_60_15]=preprocess('test',200,60,15);
+save('batch27.mat');
+clear all;
+[train_data_200_60_25]=preprocess('train',200,60,25);
+[test_data_200_60_25]=preprocess('test',200,60,25);
+save('batch28.mat');
+clear all;
+[train_data_200_60_40]=preprocess('train',200,60,40);
+[test_data_200_60_40]=preprocess('test',200,60,40);
+save('batch29.mat');
+clear all;
+
+%%Tuning Window size and Window shift
+
 %-------------TRAINING------------
 [train_data_10_10_15]=preprocess('train',10,10,15);
 [train_data_10_9_15]=preprocess('train',10,9,15);
