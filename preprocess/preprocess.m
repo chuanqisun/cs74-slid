@@ -19,8 +19,7 @@
 
 
 function [data]=preprocess(mode,Tw,Ts,C)
-    
-    addpath('./preprocess');
+
     
     f1='frame_count';
     f2='file_count';
