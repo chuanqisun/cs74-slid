@@ -1,4 +1,11 @@
-%svm test script
+%% make sure you have already loaded the data
+% ARG= 
+%[
+%Tw1, Ts1, MFCC1
+%Tw2, Ts2, MFCC2
+%...  ...  ...
+%]
+
 addpath('./svm');
 
 
