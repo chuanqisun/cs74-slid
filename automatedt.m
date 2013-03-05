@@ -1,4 +1,6 @@
 %% make sure you have already loaded the data
+%
+% automated decision tree test script
 % ARG= 
 %[
 %Tw1, Ts1, MFCC1
