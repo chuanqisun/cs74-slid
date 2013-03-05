@@ -9,7 +9,7 @@
 % convergence_mes mes to stop training
 % k for k-fold validation
 
-function [result] = nettrain(train_data,test_data,topo,max_epoch,l_rate,lambda,fail_threshold,convergence_mse,k)
+function [result,fig] = nettrain(train_data,test_data,topo,max_epoch,l_rate,lambda,fail_threshold,convergence_mse,k)
 
 %flag for plotting legend
 legendset=0;
@@ -299,6 +299,7 @@ train_error_rate=train_error_rate/k;
 %output summary
 
 close all;
+fig=figure();
 p1=plot(epoch_list, validation_mse_list, 'r');  
 hold all;
 p2=plot(epoch_list, train_mse_list, 'b');
@@ -330,4 +331,14 @@ f8='train_error_rate';
 v8=train_error_rate;
 f9='validation_error_rate';
 v9=validation_error_rate;
-result=struct(f1,v1,f2,v2,f3,v3,f4,v4,f5,v5,f6,v6,f7,v7,f8,v8);
+f10='frame_test_error_rate';
+v10=1-frame_test_correct_matrix(4,4);
+f11='epoch_list';
+v11=epoch_list;
+f12='train_mse_list';
+v12=train_mse_list;
+f13='validation_mse_list';
+v13=validation_mse_list;
+f14='frame_test_mse_list';
+v14=frame_test_mse_list;
+result=struct(f1,v1,f2,v2,f3,v3,f4,v4,f5,v5,f6,v6,f7,v7,f8,v8,f9,v9,f10,v10,f11,v11,f12,v12,f13,v13,f14,v14);
