@@ -10,7 +10,7 @@
 
 
 ARG=[
-200, 180, 15
+200, 60, 40
 ];
 
 repeat = 3;
@@ -23,7 +23,7 @@ for i=1:size(ARG,1)
     Tw=ARG(i,1);
     Ts=ARG(i,2);
     MFCC=ARG(i,3);
-    C=0.1;
+    C=0.5;
 
     train_name=eval(strcat('train_data_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC)));
     test_name=eval(strcat('test_data_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC)));

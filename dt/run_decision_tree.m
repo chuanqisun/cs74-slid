@@ -1,6 +1,8 @@
+%make prediction from given decision tree and X,Y matrices
+%Input:
+%   X,Y   -- X,Y matrices from examples
+%   tree  -- decision tree matrix
 function [ results, raw ] = run_decision_tree( X, Y, tree )
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
 
 X = X';
 Y = Y';

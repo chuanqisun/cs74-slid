@@ -1,3 +1,12 @@
+%preprocess train and test data for decision tree
+%Input:
+%   train_name -- train data struct
+%   test_name  -- test data struct
+%Return:
+%   trainX     -- parsed X matrix for training
+%   trainY     -- parsed Y matrix for training
+%   testX     -- parsed X matrix for testing
+%   testY     -- parsed Y matrix for testing
 function [ trainX,trainY,testX,testY ] = dtpreprocess( train_name, test_name)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here

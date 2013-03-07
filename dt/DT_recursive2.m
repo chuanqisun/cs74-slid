@@ -1,4 +1,4 @@
-% Template
+%helper function for constructing a decision tree recursively
 function [ new_tree, new_slot ] = DT_recursive2(X, Y, feat_idx, tree, slot, c)
 
 %DT_RECURSIVE A recursive decision tree algorithm
@@ -9,13 +9,13 @@ function [ new_tree, new_slot ] = DT_recursive2(X, Y, feat_idx, tree, slot, c)
 %   Y  Tx1  the labels for X (binary)
 %   feat_idx Rx1(R<=d) idx for features that can be used by this current 
 %                      splitting node 
-%   tree Qx3 the tree matrix (see. DecisionTree.m) holding all the part 
+%   tree Qx4 the tree matrix (see. DecisionTree.m) holding all the part 
 %            of the tree that is already calculated
 %   slot 1x1 the row number pointing to the next unused row in the tree matrix
 %   c 1x1 the max size for a leaf
 %
 %   Return
-%   new_tree Sx3 (S>=Q+1) holding all previous parts in the tree matrix
+%   new_tree Sx4 (S>=Q+1) holding all previous parts in the tree matrix
 %                         and the sub-tree rooting at the current splitting 
 %                         node.
 %   new_slot 1x1 the row number of the next unused row in new_tree
@@ -48,8 +48,9 @@ if (N <= c || size(feat_idx, 2) == 0)
         s2 = 2;
     else
         s2 = 3;
-    end  
-        
+    end    
+    
+    
     s3 = p1;
     s4 = p2;
     new_tree(slot, :) = [s1, s2, s3, s4];
@@ -106,12 +107,13 @@ for feat_index = 1:feature_N
 
            % old_entropy = get_impurity(Y);
 
-            if(Yabovecount == 0)
-                above_div_entropy = 0;
-            end
-            if(Ybelowcount == 0)
-                below_div_entropy = 0;
-            end
+            %if(Yabovecount == 0)
+            %    above_div_entropy = 0;
+            %end
+            %if(Ybelowcount == 0)
+            %    below_div_entropy = 0;
+            %end
+            
             total_new_entropy = above_div_entropy * Yabovecount/size_Y + below_div_entropy * Ybelowcount/size_Y;
         
         if total_new_entropy <= best_entropy
@@ -128,14 +130,42 @@ for feat_index = 1:feature_N
     end
         
 end
-        
+
+
+%select dividing feature
+feat_selected = feat_idx(1, best_feat_index);
+
+%declare leaf nodes if one of the two subtrees is empty   
+if size(Y(X(:, feat_selected)>=best_feature_div_point, :),1)==0 || size(Y(X(:, feat_selected)<best_feature_div_point, :),1)==0
+
+    new_tree = tree;
+
+    s1 = 0;
+
+    p1 = sum(Y(:, 1))/size(Y, 1); %fraction of English files
+    p2 = sum(Y(:, 2))/size(Y, 1); %fraction of French files
+    p3 = 1-p1-p2; %fraction of German files
+
+    if p1>=p2 && p1>=p3
+        s2 = 1;
+    elseif p2>=p3
+        s2 = 2;
+    else
+        s2 = 3;
+    end
+
+    s3 = p1;
+    s4 = p2;
+    new_tree(slot, :) = [s1, s2, s3, s4];
+    new_slot = slot+1;  
+    return
+
+end
+
+
         
 
 %feat_selected = best_feature(1, 1);
-
-
-% todo: YOUR IMPLEMENTATION HERE
-feat_selected = feat_idx(1, best_feat_index);
 
 
 %% Create a new splitting node and recursively (NO IMPLEMENTATION NEEDED)

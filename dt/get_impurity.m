@@ -1,3 +1,9 @@
+%compute impurity value (entropy)
+%Input: 
+%   Y -- output Y from which impurity is computed
+%Return;
+%   impurity -- impurity value
+
 function [ impurity ] = get_impurity( Y )
 %Calculate impurity
 %size(Y)
@@ -22,8 +28,5 @@ if p3 == 0
 end
 impurity = -(p1_im + p2_im + p3_im);
 
-%if(p1 == 0 || p0 == 0)
-%    impurity = 0;
-%end
 end
 

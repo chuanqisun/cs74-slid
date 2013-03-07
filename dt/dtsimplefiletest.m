@@ -1,4 +1,12 @@
-%test decision tree multiclass classification error rate
+%return partial distrib_matrix by testing on only one language
+%Input:
+%   testY -- Y label array for this single language
+%   raw_output -- raw output from decision tree
+%   marker -- file delimiter for testY
+%Output:
+%   f -- number of files tested
+%   distrib_matrix -- partial confusion matrix contain file count for only
+%       one language
 function [f,distrib_matrix] = dtsimplefiletest(testY, raw_output, marker)
 
 distrib_matrix=zeros(4);   

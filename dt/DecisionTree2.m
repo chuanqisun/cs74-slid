@@ -3,7 +3,7 @@
 %   Y Nx1 labels for X (binary)
 %   C is the upper bound stopping cricterion for the a decision region, as
 %   Return: 
-%   tree: Px3 the decision tree matrix
+%   tree: Px4 the decision tree matrix
 %
 %   The data structure for the decision tree matrix:
 %
@@ -14,11 +14,13 @@
 %   s1 is the decision feature for this split.
 %   s2 is the next node (row number) if x_s1=1; 
 %   s3 is the next node (row number) if x_s1=0.
-%   
+%   s4 is the spliting value for the feature selected
+%
 %   If s1==0, this row is a leaf:
 %   s1 is always 0.
-%   s2 is the label for the leaf (either 0 or 1).
+%   s2 is the label for the leaf (1 or 2 or 3).
 %   s3 is p(y=1|x is in this leaf) for this decision leaf.
+%   s4 is p(y=2|x is in this leaf) for this decision leaf.
 %
 %   The root splitting node is row 1.
 
@@ -31,6 +33,9 @@ Y = Y';
 [N,d] = size(X); assert(length(Y) == N);
 feat_idx = 1:d;         % using all the feature for the root splitting node
 c= N*C;                 % max size for a leaf node
+if c<1 
+    c=1;
+end
 tree = zeros(2*1/C, 4); % estimate the size of the tree, 
                         % and preallocate the space.
 
