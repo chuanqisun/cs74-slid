@@ -1,3 +1,8 @@
+%Convert .wav file into signal
+%Input:
+%   filename -- file to be converted
+%   signal   -- array representation of the signal
+%   fs       -- file sampling rate
 function [signal, fs]=wav2signal(filename)
 
 %convert .wav file to speech signal with silenced part removed

@@ -1,4 +1,8 @@
 %genderate file limiter from mfcclist
+%Input:
+%   mfcclist -- cell array of mfccs for each file
+%Return:
+%   marker -- delimiter marking the beginning and ending mfcc for each file
 function [marker] = generatemarker(mfcclist)
 
     mfcccount = size(mfcclist,2);

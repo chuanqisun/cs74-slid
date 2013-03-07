@@ -1,5 +1,9 @@
-%%convert all wave files in a given directory into sigal
-%threshold: min # sceonds 
+%convert wave into sigal in batch
+%Input:
+%   location  -- director for wav files
+%Return:
+%   signallist -- cell array of wav signals
+%   fslist     -- array of sample rates
 function [signallist, fslist] = batchsignal(location)
 
 

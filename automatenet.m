@@ -11,7 +11,7 @@
 
 
 ARG=[
-400, 280, 15
+200, 180, 15
 ];
 
 repeat = 3;
@@ -34,11 +34,11 @@ for i=1:size(ARG,1)
 
     topo=[45, 30, 3];
     max_epoch=1000;
-    l_rate=0.9;
-    lambda=0.002;
+    l_rate=0.5;
+    lambda=0.01;
     fail_threshold=3;
     convergence_mse=0.01;
-    k=3;
+    k=10;
 
     best_validation_error=Inf;
 

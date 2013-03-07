@@ -1,4 +1,11 @@
 %breakdown training set into k fold
+%Input: trainX -- training set X
+%       trainY -- training set Y
+%       k -- number of folds
+%Return:
+%       kfoldX -- cell array containing each fold of X
+%       kfoldY -- cell array containing each fold of Y
+%       trainsize -- size of training set = N(k-1)/k
 function [kfoldX, kfoldY, trainsize] = split(trainX, trainY, k)
     kfoldX=cell(1,k);
     kfoldY=cell(1,k);
@@ -12,7 +19,6 @@ function [kfoldX, kfoldY, trainsize] = split(trainX, trainY, k)
     for i=0:k
         splitidx=[splitidx, 1 + i*splitgap];
     end
-    %splitidx=[splitidx, sample_count+1];
     
     for i=1:k
         kfoldX{i}=zeros(splitidx(i+1)-splitidx(i), size(trainX,2));

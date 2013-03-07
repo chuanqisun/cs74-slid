@@ -1,6 +1,9 @@
-%------demo------------------------
-%note that batch1.mat is for demo
 addpath('./preprocess');
+
+
+%%------demo------------------------
+%note that this batch1.mat is for demo
+
 [train_data]=preprocess('train',25,15,15);
 [test_data]=preprocess('test',25,15,15);
 save('batch1.mat');
@@ -8,7 +11,9 @@ clear all;
 
 
 
-%%Tuning MFCC
+
+
+%%--------------Tuning MFCC--------------
 [train_data_200_60_5]=preprocess('train',200,60,5);
 [test_data_200_60_5]=preprocess('test',200,60,5);
 save('batch26.mat');
@@ -27,7 +32,8 @@ save('batch29.mat');
 clear all;
 
 
-%%Tuning for SVM (less files)
+%%-------------Tuning for SVM ------------ (run separately with less
+%%files)
 [train_data_200_60_5]=preprocess('train',200,60,5);
 [test_data_200_60_5]=preprocess('test',200,60,5);
 save('batch30.mat');

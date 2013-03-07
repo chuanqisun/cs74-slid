@@ -1,23 +1,39 @@
-%% train network
-% trainX  trainsetX
-% trainY  trainsetY
-% topo    topology [input_layer_size, ... , output_layer_size]
-% max_epoch maximum epoch to train
-% l_rate learning rate
-% lambda regulation term
-% fail_threshold #of epochs allowed after mse starts increasing
-% convergence_mes mes to stop training
-% k for k-fold validation
-
+% train network
+% Input:
+%     trainX            -- trainsetX
+%     trainY            -- trainsetY
+%     topo              -- topology [input_layer_size, ... , output_layer_size]
+%     max_epoch         -- maximum epoch to train
+%     l_rate            -- learning rate
+%     lambda            -- regulation term
+%     fail_threshold    -- #of epochs allowed after mse starts increasing
+%     convergence_mes   -- mes to stop training
+%     k                 -- k for k-fold validation
+% Return:
+%     result -- struct containing the following fields
+%           f1: the network struct
+%           f2: epochs before termination
+%           f3: min square error
+%           f4: per file test confusion matrix w.r.t. file count
+%           f5: per file test confusion matrix w.r.t. percentage
+%           f6: per frame test confustion matrix w.r.t frame count
+%           f7: per frame test confusion matrix w.r.t percentage
+%           f8: per frame training error rate
+%           f9: per frame validation error rate
+%           f10: per frame test error rate
+%           f11: array of epochs (used for plot)
+%           f12: array of training mse for each epoch
+%           f13: array of validation mse for each epoch
+%           f14: array of frame test mse for each epoch
+%     fig -- a plot of f11,f12,f13 against f11
 function [result,fig] = nettrain(train_data,test_data,topo,max_epoch,l_rate,lambda,fail_threshold,convergence_mse,k)
 
 %flag for plotting legend
 legendset=0;
 
-%return structure of network
+%parse parameters
 myNet.topo = topo;
 
-%set constants for topology and input/output
 trainX = cat(2,train_data.en_X,train_data.fr_X,train_data.ge_X)';
 trainY = cat(2,train_data.en_Y,train_data.fr_Y,train_data.ge_Y)';
 
@@ -35,8 +51,6 @@ testY = cat(1, en_testY,fr_testY,ge_testY);
 en_marker=test_data.en_marker;
 fr_marker=test_data.fr_marker;
 ge_marker=test_data.ge_marker;
-
-
 
 %prepare error rate array against epoch list
 train_mse_list=[];
@@ -84,7 +98,6 @@ for i=1:layer_N-1
     old_weights{i} = zeros(topo(i+1), topo(i)+1);
 end
 
-
 %allocate space for y, input signal of each layer.  first layer is input,
 %the hidden layers are sigmoided values plus a bias value. The output layer
 %has no bias node.
@@ -96,14 +109,14 @@ for i = 2:layer_N-1
 end
 y{layer_N}= zeros(sample_N, topo(layer_N));
 
+%prepare for main loop
 min_mse=Inf;
 fail_count=0;
 mse = Inf;
 epochs = 0;
 
+%main loop
 while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
-
-  
     
     %reset avg delta_weights        
     for i = 1:layer_N-1
@@ -116,7 +129,7 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     
     %for each fold feedforwad, backprop, and compute error
     for f=1:k
-        %construct validation set
+        %construct validation set just for this fold
         validX=kfoldX{f};
         validY=kfoldY{f};
         
@@ -158,7 +171,7 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
             end
         end
         
-        %update weights (temporary)
+        %update weights (temporary, just for this fold)
         for i = 1:layer_N-1
             old_weights{i}(end)=0;
             temp_weights{i} = weights{i} + delta_weights{i} ./sample_N + lambda*old_weights{i};
@@ -166,7 +179,7 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
         end    
         myNet.weights = temp_weights;
      
-        %compute current mse
+        %compute current mse, just for this fold
     	[output,raw_output,mse] = nettest(myNet,validX,validY);
         validation_mse = validation_mse + mse;
         [output,raw_output,mse] = nettest(myNet,trainX,trainY);
@@ -174,7 +187,8 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     end
 
     
-    %adjust weights with avg delta
+    %adjust weights with avg delta, permanently, using average across k
+    %folds
     for i = 1:layer_N-1
         weights{i} = weights{i} + avg_delta_weights{i}/(k*sample_N) + lambda*old_weights{i};
     end    
@@ -190,8 +204,7 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     train_mse_list=[train_mse_list, train_mse/k];  
     epoch_list=[epoch_list, epochs];
     
-    %plot
-
+    %plot -- the plot refreshes dynamically after the first 100 epochs
     if epochs <= 100
         p1=plot(epoch_list, validation_mse_list, 'r', 'LineWidth',2);  
         hold all;
@@ -222,7 +235,8 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     
     disp('epoch: ');
     disp(epochs);
-    %update epoch
+    
+    %update epoch and terminate conditions
     epochs = epochs +1;
     disp('train MSE: ');  
     train_mse = train_mse/k;
@@ -237,8 +251,9 @@ while mse > convergence_mse && epochs < max_epoch && fail_count < fail_threshold
     disp(train_mse);
     
     
-
 end
+
+%---------------after training----------------
 
 %measure error rate
 
@@ -267,7 +282,7 @@ end
       
 
 
-%training error rate and validation error rate
+%training error rate and validation error rate, based on k-fold
 validation_error_rate=0;
 train_error_rate=0;
 for f=1:k
@@ -296,8 +311,7 @@ train_error_rate=train_error_rate/k;
     
      
 
-%output summary
-
+%output summary plot and store everything in struct
 close all;
 fig=figure();
 p1=plot(epoch_list, validation_mse_list, 'r');  

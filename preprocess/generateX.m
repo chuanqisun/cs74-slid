@@ -1,5 +1,8 @@
-%generate X vector from flatmfcclist given number of neurons in input layer
-% limit applies to number of mfcc vectors for each file
+%generate X vector from flatmfcclist
+%Input:
+%   mfcclist -- cell array of mfccs for each file
+%Return:
+%   X -- X matrix compatible with training data format
 function [X]=generateX(mfcclist)
 
     X=[];

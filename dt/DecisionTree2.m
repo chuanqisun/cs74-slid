@@ -1,13 +1,10 @@
-% Template for Decision Tree, NO IMPLEMENTATION NEEDED FOR THIS FILE
-function [ tree ] = DecisionTree2( X, Y, C )
-%DECISIONTREE This function learns a decision tree from training data X&Y
+%construct decision tree from training examples
 %   X Nxd N d-dim traing samples (binary)
 %   Y Nx1 labels for X (binary)
 %   C is the upper bound stopping cricterion for the a decision region, as
-%   described in the question.
 %   Return: 
 %   tree: Px3 the decision tree matrix
-
+%
 %   The data structure for the decision tree matrix:
 %
 %   The tree structure is a Px3 matrix, each row [s1, s2, s3]
@@ -25,7 +22,7 @@ function [ tree ] = DecisionTree2( X, Y, C )
 %
 %   The root splitting node is row 1.
 
-
+function [ tree ] = DecisionTree2( X, Y, C )
 %% initialization
 
 X = X';

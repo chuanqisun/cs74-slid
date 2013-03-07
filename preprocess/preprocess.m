@@ -2,7 +2,8 @@
 %
 % preparation
 %   put language files in "../wav/en" "../wav/fr" "../wav/ge" directories
-%   make sure none of these directories is empty
+%   make sure none of these directories is empty and no other files are
+%   present. Clean up the hidden files before executing the program.
 %
 % input
 %   Tw:     window size
@@ -10,14 +11,12 @@
 %   C:      number of cepstral coefficients
 %
 %   return:
-%       mode:           ['train'|'test'] determine which directory to read
-%       frame_count:    number of frames for each language
-%       file_count:     number of files for each language
-%       xx_X:           X vector for xx language
-%       xx_Y:           Y vector for xx language
-%       xx_marke        file delimiters for xx language
-
-
+%       data -- struct containing the following fields
+%           frame_count:    number of frames for each language
+%           file_count:     number of files for each language
+%           xx_X:           X vector for xx language
+%           xx_Y:           Y vector for xx language
+%           xx_marke        file delimiters for xx language
 function [data]=preprocess(mode,Tw,Ts,C)
 
     

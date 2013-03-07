@@ -1,3 +1,12 @@
+%convert signal into MFCC in batches
+%Input:
+%   signallist  -- cell array of raw signals
+%   fslist      -- list of sampling rate for each file
+%   Tw          -- window size
+%   Ts          -- window shift
+%   C           -- number of MFCC coefficients
+%Return:
+%   mfcclist  -- cell array with each file's mfcc in cell
 function [mfcclist] = batchmfcc(signallist,fslist,Tw,Ts,C)
 
 %convert every signal in a cell array into MFCC vectors
