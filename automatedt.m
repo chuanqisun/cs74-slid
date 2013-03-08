@@ -12,7 +12,7 @@
 
 
 ARG=[
-200, 60, 40
+25, 15, 15
 ];
 
 repeat = 3; %number of times each parameter combination is tested
