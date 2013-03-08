@@ -1,7 +1,10 @@
 addpath('./preprocess');
 
+%It is highly recommended that slipt this script into different batches
+%so as to run on multiple computers. Otherwise, it will take too long to
+%load the data
 
-%%------demo------------------------
+%------demo------------------------------
 %note that this batch1.mat is for demo
 
 [train_data]=preprocess('train',25,15,15);
@@ -9,7 +12,7 @@ addpath('./preprocess');
 save('batch1.mat');
 clear all;
 
-
+%---------end of demo--------------------
 
 
 

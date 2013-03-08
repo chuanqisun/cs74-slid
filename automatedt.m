@@ -1,19 +1,21 @@
-%% make sure you have already loaded the data
+% automated Decision Tree test script
 %
-% automated decision tree test script
+% load the data by running preprocess.m first
+% fill the ARG matrix with arguments and run the script
+%
 % ARG= 
 %[
 %Tw1, Ts1, MFCC1
 %Tw2, Ts2, MFCC2
 %...  ...  ...
-%]
+%
 
 
 ARG=[
 200, 60, 40
 ];
 
-repeat = 3;
+repeat = 3; %number of times each parameter combination is tested
 
 addpath('dt');
 

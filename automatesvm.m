@@ -1,6 +1,7 @@
-%% make sure you have already loaded the data
-%
 % automated SVM test script
+%
+% load the data by running preprocess.m first
+% fill the ARG matrix with arguments and run the script
 %
 % ARG= 
 %[

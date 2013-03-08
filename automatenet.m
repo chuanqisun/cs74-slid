@@ -1,6 +1,7 @@
-%% make sure you have already loaded the data
+% automated ANN test script
 %
-% automated neural networks test script
+% load the data by running preprocess.m first
+% fill the ARG matrix with arguments and run the script
 %
 % ARG= 
 %[
@@ -14,7 +15,7 @@ ARG=[
 200, 180, 15
 ];
 
-repeat = 3;
+repeat = 3;  %number of times each parameter combination is tested
 
 addpath('ann');
 
@@ -32,13 +33,13 @@ for i=1:size(ARG,1)
     figure_name=strcat('ann_figure_', num2str(Tw), '_', num2str(Ts), '_' , num2str(MFCC), '.fig');
 
 
-    topo=[45, 30, 3];
-    max_epoch=1000;
-    l_rate=0.5;
-    lambda=0.01;
-    fail_threshold=3;
-    convergence_mse=0.01;
-    k=10;
+    topo=[45, 30, 3];       %topology
+    max_epoch=1000;         %max number of epochs
+    l_rate=0.5;             %learning rate
+    lambda=0.01;            %regularization
+    fail_threshold=3;       %number of continuous validation failures allowed
+    convergence_mse=0.01;   %convergence mse
+    k=10;                   %k-fold
 
     best_validation_error=Inf;
 
