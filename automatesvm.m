@@ -13,10 +13,7 @@ addpath('./svm');
 
 
 ARG=[
-400, 160, 15;
-400, 200, 15;
-400, 240, 15;
-400, 280, 15
+200,180,15
 ];
 
 
@@ -40,7 +37,7 @@ for i=1:size(ARG,1)
     [frSV]=svmtrain(trainX,frvsallY,kernel_matrix,100,1e-5); 
     [geSV]=svmtrain(trainX,gevsallY,kernel_matrix,100,1e-5);
     [frame_distrib_matrix, frame_correct_matrix] = svmtest(testX,testY,enSV,frSV,geSV,1);
-    [file_distrib_matrix, file_correct_matrix]=svmfiletest(test_data,enSV,frSV,geSV,1);
+    [file_distrib_matrix, file_correct_matrix]=svmfiletest(test_name,enSV,frSV,geSV,1);
 
     
     f1='frame_distrib_matrix';

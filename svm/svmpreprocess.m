@@ -1,4 +1,14 @@
-%preprocess the train data for three SVM's
+%preprocess train and test data for SVM
+%Input:
+%   train_data -- train data struct
+%   test_data  -- test data struct
+%   degree     -- degree of poly kernel
+%Return:
+%   trainX     -- parsed X matrix for training
+%   xxvsallY   -- Y matrix for language xx versus all
+%   testX     -- parsed X matrix for testing
+%   testY     -- parsed Y matrix for testing
+%   kernel_matrix -- polynomial kernel matrix computed using the given degree
 
 function [trainX,envsallY,frvsallY,gevsallY,testX,testY,kernel_matrix]=svmpreprocess(train_data,test_data,degree)
     encount=train_data.frame_count(1);
