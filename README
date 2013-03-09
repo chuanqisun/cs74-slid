@@ -26,9 +26,9 @@ software version:   MATLAB R2012b
     /vad/ ---------------------------- [EXTERNAL RESOURCES] voice activity detection
     /voicebox/ ----------------------- [EXTERNAL RESOURCES] utilities for mfcc
 
-./wav/ ------------------------------- (not included in the submission) resources directory
+./wav/ ------------------------------- resources directory
     /en/
-        /train/ ---------------------- load it with train examples
+        /train/ ---------------------- load it with training examples
         /test/ ----------------------- load it with test examples
     /fr/
         /train/
@@ -40,16 +40,17 @@ software version:   MATLAB R2012b
  ---------------------------
 | 3. how to set up and run  |
  ---------------------------
-(1) create the resources directory as shown above;
-(2) fill each sub directory in ./wav with wave files from each language; 
-(3) make sure no miscellaneous or hidden files exist in ./wav and its sub directories;
-(4) run proper sections of automateimport.m to preprocess and store the preprocessed data;
-(4) load the preprocessed data into current workspace;
-(5) open automatenet.m, fill the ARG matrix with parameters matching those in your workspace;
-(6) run automatenet.m and the training process with be displayed, the outcome will be stored
+(1) if you choose to use example training/testting data, skip to step (4)
+(2) create your own resources directory as shown above;
+(3) fill each sub directory in ./wav with wave files from each language; 
+(4) make sure no miscellaneous or hidden files exist in ./wav and its sub directories;
+(5) run proper sections of automateimport.m to preprocess and store the preprocessed data;
+(6) load the preprocessed data into current workspace;
+(7) open automatenet.m, fill the ARG matrix with parameters matching those in your workspace;
+(8) run automatenet.m and the training process with be displayed, the outcome will be stored
     in ./slid;
-(7) run automatesvm.m and automatedt.m the same way as in (6);
+(9) run automatesvm.m and automatedt.m the same way as in (6);
     WARNING: you computer may crash from running automatesvm.m on large dataset. 
-(8) load and analyze results.
+(10) load and analyze results.
 
 for detailed information about functions and parameters, please see the comments in files.

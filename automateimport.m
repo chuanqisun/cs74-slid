@@ -7,8 +7,8 @@ addpath('./preprocess');
 %------demo------------------------------
 %note that this batch1.mat is for demo
 %%
-[train_data]=preprocess('train',25,15,15);
-[test_data]=preprocess('test',25,15,15);
+[train_data_200_100_15]=preprocess('train',200,100,15);
+[test_data_200_100_15]=preprocess('test',200,100,15);
 save('batch1.mat');
 clear all;
 
